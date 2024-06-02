@@ -3,6 +3,7 @@ package com.adamjonson.authorsapi;
 import com.adamjonson.authorsapi.model.Author;
 import com.adamjonson.authorsapi.model.AuthorWork;
 import com.adamjonson.authorsapi.service.AuthorService;
+import com.adamjonson.authorsapi.service.AuthorWithWorks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class AuthorController {
     }
 
     @GetMapping("/{id}/works")
-    public List<AuthorWork> getAuthorWorks(@PathVariable String id) {
+    public AuthorWithWorks getAuthorWorks(@PathVariable String id) {
         return authorService.findWorksByAuthorId(id);
     }
 }
