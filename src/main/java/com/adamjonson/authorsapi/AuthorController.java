@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/authors")
 public class AuthorController {
 
+    @Autowired
     private AuthorService authorService;
     @GetMapping("/{name}")
     public Author getAuthorByName(@PathVariable String name) {
