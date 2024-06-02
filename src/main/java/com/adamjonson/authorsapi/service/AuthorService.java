@@ -2,6 +2,7 @@ package com.adamjonson.authorsapi.service;
 
 import com.adamjonson.authorsapi.model.Author;
 import org.springframework.stereotype.Service;
+import com.adamjonson.authorsapi.api.OpenLibraryApi;
 
 @Service
 public class AuthorService {
