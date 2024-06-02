@@ -1,5 +1,6 @@
 package com.adamjonson.authorsapi.service;
 
+import com.adamjonson.authorsapi.api.OpenLibraryApiAuthorDetails;
 import com.adamjonson.authorsapi.model.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
