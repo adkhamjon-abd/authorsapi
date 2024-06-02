@@ -15,4 +15,9 @@ public class AuthorController {
     public Author getAuthorByName(@PathVariable String name) {
         return authorService.findAuthorByName(name);
     }
+
+    @GetMapping("/{id}/works")
+    public List<AuthorWork> getAuthorWorks(@PathVariable String id) {
+        return authorService.findWorksByAuthorId(id);
+    }
 }
