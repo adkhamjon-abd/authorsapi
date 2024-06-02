@@ -1,4 +1,4 @@
-package com.adamjonson.authorsapi;
+package com.adamjonson.authorsapi.controller;
 
 import com.adamjonson.authorsapi.model.Author;
 import com.adamjonson.authorsapi.model.AuthorWork;
