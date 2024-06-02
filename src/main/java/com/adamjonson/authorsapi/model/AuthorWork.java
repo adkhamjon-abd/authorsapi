@@ -14,5 +14,5 @@ public class AuthorWork {
     private int id;
 
     private String title;
-    private String openLibraryId;
+    private String authorId;
 }

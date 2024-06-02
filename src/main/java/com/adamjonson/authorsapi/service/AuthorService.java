@@ -1,6 +1,7 @@
 package com.adamjonson.authorsapi.service;
 
 import com.adamjonson.authorsapi.api.OpenLibraryApiAuthorDetails;
+import com.adamjonson.authorsapi.api.OpenLibraryApiWorksResponse;
 import com.adamjonson.authorsapi.model.Author;
 import com.adamjonson.authorsapi.model.AuthorWork;
 import com.adamjonson.authorsapi.repo.AuthorWorkRepository;
@@ -58,11 +59,28 @@ public class AuthorService {
 
     }
 
-    public List<AuthorWork> findWorksByAuthorId(String openLibraryId) {
-        List<AuthorWork> works = authorWorkRepository.findByAuthorId(openLibraryId);
+    public AuthorWithWorks findWorksByAuthorId(String authorId) {
+        Author author = authorRepository.findByOpenLibraryId(authorId);
+        List<AuthorWork> works = authorWorkRepository.findByAuthorId(authorId);
+        // Return works of the author with name if exists
         if (!works.isEmpty()) {
-            return works;
+            return AuthorWithWorks(author, works);
+        } else {
+            // Fetch works from OpenLibrary API
+            String url = OPEN_LIBRARY_API_AUTHOR_URL + authorId + "/works.json";
+            OpenLibraryApiWorksResponse response = restTemplate.getForObject(url, OpenLibraryApiWorksResponse.class);
+            if (response != null && response.getEntries() != null) {
+                for (OpenLibraryApiWorksResponse.Entry entry : response.getEntries()) {
+                    AuthorWork work = new AuthorWork();
+                    work.setTitle(entry.getTitle());
+                    work.setAuthorId(authorId);
+                    authorWorkRepository.save(work);
+                    works.add(work);
+                }
+                return AuthorWithWorks(author, works);
+            } else {
+                return null; // Return empty list if no works are found
+            }
         }
-        return null;
     }
 }
