@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface AuthorRepository extends JpaRepository<Author, Integer> {
 
     Author findByName(String name);
+
+    Author findByOpenLibraryId(String authorId);
 }
