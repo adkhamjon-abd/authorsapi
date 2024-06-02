@@ -1,6 +1,7 @@
 package com.adamjonson.authorsapi;
 
 import com.adamjonson.authorsapi.model.Author;
+import com.adamjonson.authorsapi.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,8 +9,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/authors")
 public class AuthorController {
 
+    private AuthorService authorService;
     @GetMapping("/{name}")
     public Author getAuthorByName(@PathVariable String name) {
-        return new Author();
+        return authorService.findAuthorByName(name);
     }
 }
