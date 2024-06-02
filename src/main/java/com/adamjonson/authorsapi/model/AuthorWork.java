@@ -11,8 +11,8 @@ import lombok.Data;
 public class AuthorWork {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private String title;
-    private String OpenLibraryId;
+    private String openLibraryId;
 }

@@ -2,11 +2,15 @@ package com.adamjonson.authorsapi.service;
 
 import com.adamjonson.authorsapi.api.OpenLibraryApiAuthorDetails;
 import com.adamjonson.authorsapi.model.Author;
+import com.adamjonson.authorsapi.model.AuthorWork;
+import com.adamjonson.authorsapi.repo.AuthorWorkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.adamjonson.authorsapi.api.OpenLibraryApi;
 import com.adamjonson.authorsapi.repo.AuthorRepository;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service
 public class AuthorService {
@@ -14,6 +18,8 @@ public class AuthorService {
     @Autowired
     AuthorRepository authorRepository;
 
+    @Autowired
+    AuthorWorkRepository authorWorkRepository;
 
     private final RestTemplate restTemplate;
     @Autowired
@@ -50,5 +56,13 @@ public class AuthorService {
             return null;
         }
 
+    }
+
+    public List<AuthorWork> findWorksByAuthorId(String openLibraryId) {
+        List<AuthorWork> works = authorWorkRepository.findByAuthorId(openLibraryId);
+        if (!works.isEmpty()) {
+            return works;
+        }
+        return null;
     }
 }
