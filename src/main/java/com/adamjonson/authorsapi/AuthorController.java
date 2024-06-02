@@ -1,9 +1,12 @@
 package com.adamjonson.authorsapi;
 
 import com.adamjonson.authorsapi.model.Author;
+import com.adamjonson.authorsapi.model.AuthorWork;
 import com.adamjonson.authorsapi.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/authors")
