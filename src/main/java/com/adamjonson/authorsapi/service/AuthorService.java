@@ -7,6 +7,18 @@ import org.springframework.stereotype.Service;
 public class AuthorService {
 
     public Author findAuthorByName(String name) {
-        return new Author();
+        Author author = authorRepository.findByName(name);
+        if (author != null) {
+            return author;
+        } else {
+            Author externalAuthor = OpenLibraryApi.fetchAuthorByName(name);
+            if (externalAuthor != null) {
+                authorRepository.save(externalAuthor);
+                return externalAuthor;
+            } else {
+                return null;
+            }
+        }
+
     }
 }
