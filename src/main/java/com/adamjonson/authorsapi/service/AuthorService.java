@@ -14,8 +14,12 @@ public class AuthorService {
     @Autowired
     AuthorRepository authorRepository;
 
+
+    private final RestTemplate restTemplate;
     @Autowired
-    private RestTemplate restTemplate;
+    public AuthorService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     private static final String OPEN_LIBRARY_API_SEARCH_URL = "https://openlibrary.org/search/authors.json?q=";
     private static final String OPEN_LIBRARY_API_AUTHOR_URL = "https://openlibrary.org/authors/";
@@ -38,7 +42,7 @@ public class AuthorService {
                 if (authorDetails != null) {
                     Author fetchedAuthor = new Author();
                     fetchedAuthor.setName(authorDetails.getName());
-                    fetchedAuthor.setOpenLibraryId(authorDetails.getKey());
+                    fetchedAuthor.setOpenLibraryId(response.getDocs().get(0).getKey());
                     authorRepository.save(fetchedAuthor);
                     return fetchedAuthor;
                 }
