@@ -64,7 +64,7 @@ public class AuthorService {
         List<AuthorWork> works = authorWorkRepository.findByAuthorId(authorId);
         // Return works of the author with name if exists
         if (!works.isEmpty()) {
-            return AuthorWithWorks(author, works);
+            return new AuthorWithWorks(author, works);
         } else {
             // Fetch works from OpenLibrary API
             String url = OPEN_LIBRARY_API_AUTHOR_URL + authorId + "/works.json";
@@ -77,7 +77,7 @@ public class AuthorService {
                     authorWorkRepository.save(work);
                     works.add(work);
                 }
-                return AuthorWithWorks(author, works);
+                return new AuthorWithWorks(author, works);
             } else {
                 return null; // Return empty list if no works are found
             }
