@@ -33,7 +33,7 @@ public class AuthorService {
 
                 // Fetch detailed author data using the key
                 String authorDetailsUrl = OPEN_LIBRARY_API_AUTHOR_URL + doc.getKey() + ".json";
-                OpenLibraryApiAuthorDetails authorDetails = restTemplate.getForObject(authorDetailsUrl, ExternalApiAuthorDetails.class);
+                OpenLibraryApiAuthorDetails authorDetails = restTemplate.getForObject(authorDetailsUrl, OpenLibraryApiAuthorDetails.class);
 
                 if (authorDetails != null) {
                     Author fetchedAuthor = new Author();
